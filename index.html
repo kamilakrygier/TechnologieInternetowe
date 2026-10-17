@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Szprycha – Pracownia Rowerowa</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #f8f9fa;
+      padding: 0 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 1. Header */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 2px solid #eaeaea;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #4426ff;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .menu a:hover {
+      color: #1b079b;
+    }
+
+    /* 2. Sekcje */
+    main {
+      margin: 40px 0;
+    }
+
+    section {
+      margin-bottom: 90px; /* Duży odstęp, żeby karty nie nachodziły na Cennik */
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+      color: #111;
+    }
+
+    /* 3. ZDJĘCIE - likwidacja białych boków i pełne dopasowanie */
+    .hero-box {
+      width: 100%;
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      background-color: #eee;
+    }
+
+    .hero-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Wypełnia całą szerokość i wysokość bez pustych boków */
+      object-position: center;
+      display: block;
+    }
+
+    /* 4. KARTY - likwidacja ucinania górnej plakietki i krawędzi */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: stretch;
+      padding: 20px 0; /* Zapas miejsca z góry i dołu */
+    }
+
+    .card {
+      flex: 1 1 260px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 24px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .card_price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    /* Wyróżniona karta */
+    .card--highlight {
+      border: 2px solid #4426ff;
+      background: #faf9ff;
+    }
+
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: #4426ff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+
+    /* 5. Cennik */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .price-table th {
+      background-color: #f3f4f6;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+
+    /* 6. Stopka */
+    footer#kontakt {
+      padding: 40px 0 60px;
+      border-top: 1px solid #ddd;
+    }
+
+    footer a {
+      color: #4426ff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .site-header {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .hero-box {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nagłówek i nawigacja -->
+  <header class="site-header">
+    <p class="logo">Szprycha</p>
+    <nav class="menu">
+      <a href="#uslugi">Usługi</a>
+      <a href="#cennik">Cennik</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Główna zawartość -->
+  <main>
+    <!-- Sekcja 1: Usługi / Karty -->
+    <section id="uslugi">
+      <h2>Nasze Usługi</h2>
+      
+      <!-- Zdjęcie bez białych pasów po bokach -->
+      <div class="hero-box">
+        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200&auto=format&fit=crop&q=80" 
+             alt="Stanowisko serwisowe w pracowni rowerowej Szprycha">
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Przegląd podstawowy</h3>
+          <p>Regulacja hamulców, smarowanie napędu i kontrola ciśnienia w oponach.</p>
+          <p class="card_price">od 90 zł</p>
+        </article>
+
+        <article class="card card--highlight">
+          <span class="badge">Najczęściej wybierane</span>
+          <h3>Duży serwis</h3>
+          <p>Kompleksowe czyszczenie napędu, centrowanie kół, regulacja przerzutek i hamulców.</p>
+          <p class="card_price">od 190 zł</p>
+        </article>
+
+        <article class="card">
+          <h3>Serwis amortyzatorów</h3>
+          <p>Wymiana oleju, uszczelek oraz precyzyjne ustawienie tłumienia.</p>
+          <p class="card_price">od 220 zł</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sekcja 2: Cennik -->
+    <section id="cennik">
+      <h2>Cennik</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Usługa</th>
+            <th class="num">Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Przegląd podstawowy</td>
+            <td class="num">90 zł</td>
+          </tr>
+          <tr>
+            <td>Duży serwis kompleksowy</td>
+            <td class="num">190 zł</td>
+          </tr>
+          <tr>
+            <td>Centrowanie koła (sztuka)</td>
+            <td class="num">45 zł</td>
+          </tr>
+          <tr>
