@@ -69,18 +69,19 @@
     }
 
     /* 3. ZDJĘCIE - mniejsze i wyśrodkowane */
-    .hero-box {
+    /* Kontener na zdjęcie - mały i wyśrodkowany */
+        .hero-box {
         width: 100%;
-        max-width: 480px;      /* zmniejsza fizyczny rozmiar zdjęcia */
-        margin: 0 auto 36px auto; /* wyśrodkowanie w poziomie */
-        border-radius: 12px;
-        overflow: hidden;
+        max-width: 450px;         /* tutaj sterujesz rozmiarem - np. 400px lub 450px */
+        margin: 0 auto 36px auto; /* wyśrodkowanie na stronie */
     }
 
+    /* Samo zdjęcie - ZAWSZE w 100% całe, zero przycinania */
     .hero-box img {
         width: 100%;
-        height: auto;          /* kluczowe: zachowuje 100% proporcji i nie ucina zdjęcia */
+        height: auto;             /* zachowuje pełne proporcje, nie ucina nic */
         display: block;
+        border-radius: 10px;      /* zaokrąglone rogi zdjęcia */
     }
 
     /* 4. Karty usług */
