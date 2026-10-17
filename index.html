@@ -59,7 +59,7 @@
     }
 
     section {
-      margin-bottom: 90px; /* Duży odstęp, żeby karty nie nachodziły na Cennik */
+      margin-bottom: 90px;
     }
 
     h2 {
@@ -68,31 +68,28 @@
       color: #111;
     }
 
-    /* 3. ZDJĘCIE - likwidacja białych boków i pełne dopasowanie */
+    /* 3. ZDJĘCIE - mniejsze i wyśrodkowane */
     .hero-box {
-      width: 100%;
-      height: 320px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 40px;
-      background-color: #eee;
+        width: 100%;
+        max-width: 480px;      /* zmniejsza fizyczny rozmiar zdjęcia */
+        margin: 0 auto 36px auto; /* wyśrodkowanie w poziomie */
+        border-radius: 12px;
+        overflow: hidden;
     }
 
     .hero-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Wypełnia całą szerokość i wysokość bez pustych boków */
-      object-position: center;
-      display: block;
+        width: 100%;
+        height: auto;          /* kluczowe: zachowuje 100% proporcji i nie ucina zdjęcia */
+        display: block;
     }
 
-    /* 4. KARTY - likwidacja ucinania górnej plakietki i krawędzi */
+    /* 4. Karty usług */
     .cards {
       display: flex;
       flex-wrap: wrap;
       gap: 24px;
       align-items: stretch;
-      padding: 20px 0; /* Zapas miejsca z góry i dołu */
+      padding: 20px 0;
     }
 
     .card {
@@ -194,7 +191,7 @@
         align-items: flex-start;
       }
       .hero-box {
-        height: 200px;
+        height: 160px;
       }
     }
   </style>
@@ -217,9 +214,9 @@
     <section id="uslugi">
       <h2>Nasze Usługi</h2>
       
-      <!-- Zdjęcie bez białych pasów po bokach -->
+      <!-- Zmniejszone zdjęcie -->
       <div class="hero-box">
-        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200&auto=format&fit=crop&q=80" 
+        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80" 
              alt="Stanowisko serwisowe w pracowni rowerowej Szprycha">
       </div>
 
@@ -269,3 +266,43 @@
             <td class="num">45 zł</td>
           </tr>
           <tr>
+            <td>Regulacja przerzutki</td>
+            <td class="num">35 zł</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Stopka: Kontakt -->
+  <footer id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Pracownia Rowerowa Szprycha</p>
+    <p>Adres: ul. Gdańska 10, 85-006 Bydgoszcz</p>
+    <p>Telefon: <a href="tel:+48500100200">+48 500 100 200</a></p>
+    <p>E-mail: <a href="mailto:kontakt@szprycha-bydgoszcz.pl">kontakt@szprycha-bydgoszcz.pl</a></p>
+  </footer>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    gsap.from(".site-header", {
+      duration: 0.8,
+      y: -30,
+      opacity: 0,
+      ease: "power2.out"
+    });
+
+    gsap.from(".card", {
+      duration: 0.7,
+      delay: 0.1,
+      y: 30,
+      opacity: 0,
+      stagger: 0.15,
+      ease: "power2.out",
+      clearProps: "all"
+    });
+  </script>
+</body>
+</html>
