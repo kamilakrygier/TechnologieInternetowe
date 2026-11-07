@@ -192,4 +192,27 @@ footer a:hover {
   .hero-image-wrapper {
     height: 220px;
   }
+  
+  /* --- KOD DLA MENU MOBILNEGO --- */
+  .menu-toggle {
+    display: block !important; /* Pokazuje przycisk "Menu" */
+    padding: 8px 16px;
+    background: #4426ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .menu {
+    display: none; /* Ukrywa linki domyślnie na telefonie */
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .menu.menu--open {
+    display: flex !important; /* Pokazuje linki po kliknięciu */
+  }
 }
