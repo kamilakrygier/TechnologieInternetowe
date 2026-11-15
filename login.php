@@ -21,14 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="pl">
-<head><meta charset="UTF-8"><title>Logowanie</title></head>
-<body>
-    <h1>Zaloguj się</h1>
-    <?php if ($blad): ?><p style="color:red;"><?= $blad ?></p><?php endif; ?>
-    <form method="post">
-        <label>Login: <input type="text" name="login" required></label><br><br>
-        <label>Hasło: <input type="password" name="haslo" required></label><br><br>
-        <button>Zaloguj</button>
-    </form>
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-4 shadow-sm" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4">Zaloguj się</h2>
+        <?php if ($blad): ?><div class="alert alert-danger"><?= $blad ?></div><?php endif; ?>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Login</label>
+                <input type="text" name="login" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hasło</label>
+                <input type="password" name="haslo" class="form-control" required>
+            </div>
+            <button class="btn btn-primary w-100">Zaloguj</button>
+        </form>
+    </div>
 </body>
 </html>

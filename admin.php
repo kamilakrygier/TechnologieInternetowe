@@ -5,6 +5,7 @@ require 'baza.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $akcja = $_POST['akcja'] ?? '';
     
+    // Dodawanie
     if ($akcja === 'dodaj') {
         $nazwa = trim($_POST['nazwa'] ?? '');
         $cena = (int) ($_POST['cena'] ?? 0);
@@ -16,40 +17,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+    
+    // Usuwanie
+    if ($akcja === 'usun') {
+        $z = $pdo->prepare('DELETE FROM uslugi WHERE id = :id');
+        $z->execute(['id' => (int) $_POST['id']]);
+        header('Location: admin.php?ok=usunieto');
+        exit;
+    }
 }
 
 $uslugi = $pdo->query('SELECT id, nazwa, cena FROM uslugi ORDER BY nazwa')->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
-<head><meta charset="UTF-8"><title>Panel Admina</title></head>
-<body>
-    <h1>Panel zarządzania cennikiem</h1>
-    <a href="wyloguj.php">Wyloguj</a>
-    
-    <?php if (isset($_GET['ok']) && $_GET['ok'] === 'dodano'): ?>
-        <p style="color:green;">Usługa została dodana!</p>
-    <?php endif; ?>
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admina - Szprycha</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Panel CMS</h1>
+            <a href="wyloguj.php" class="btn btn-secondary">Wyloguj</a>
+        </div>
 
-    <h2>Lista usług</h2>
-    <table border="1">
-        <tr><th>Nazwa</th><th>Cena</th></tr>
-        <?php foreach ($uslugi as $usluga): ?>
-            <tr>
-                <td><?= htmlspecialchars($usluga['nazwa']) ?></td>
-                <td><?= $usluga['cena'] ?> zł</td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+        <?php if (isset($_GET['ok']) && $_GET['ok'] === 'dodano'): ?>
+            <div class="alert alert-success">Usługa dodana.</div>
+        <?php endif; ?>
+        <?php if (isset($_GET['ok']) && $_GET['ok'] === 'usunieto'): ?>
+            <div class="alert alert-info">Usługa usunięta.</div>
+        <?php endif; ?>
 
-    <h2>Dodaj nową usługę</h2>
-    <form method="post">
-        <input type="hidden" name="akcja" value="dodaj">
-        <label for="nazwa">Nazwa</label>
-        <input id="nazwa" name="nazwa" required maxlength="100"><br><br>
-        <label for="cena">Cena (zł)</label>
-        <input id="cena" name="cena" type="number" min="1" required><br><br>
-        <button>Dodaj</button>
-    </form>
+        <div class="row">
+            <div class="col-lg-8">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Usługa</th>
+                            <th>Cena</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($uslugi as $usluga): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($usluga['nazwa']) ?></td>
+                                <td><?= $usluga['cena'] ?> zł</td>
+                                <td>
+                                    <form method="post" class="d-inline">
+                                        <input type="hidden" name="akcja" value="usun">
+                                        <input type="hidden" name="id" value="<?= (int) $usluga['id'] ?>">
+                                        <button class="btn btn-sm btn-outline-danger">Usuń</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <div class="card p-3">
+                    <h4>Dodaj nową</h4>
+                    <form method="post">
+                        <input type="hidden" name="akcja" value="dodaj">
+                        <div class="mb-3">
+                            <label for="nazwa" class="form-label">Nazwa usługi</label>
+                            <input id="nazwa" name="nazwa" class="form-control" required maxlength="100">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cena" class="form-label">Cena (zł)</label>
+                            <input id="cena" name="cena" type="number" min="1" class="form-control" required>
+                        </div>
+                        <button class="btn btn-primary w-100">Dodaj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
