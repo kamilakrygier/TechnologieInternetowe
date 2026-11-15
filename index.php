@@ -1,9 +1,12 @@
 <?php
-// Zadanie 2: Zmienne PHP
 $firma = 'Szprycha';
 $rok = date('Y');
 
-// Zadanie 3: Tablica z usługami do cennika
+require 'baza.php';
+$cennik = $pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll();
+?>
+<!DOCTYPE html>
+
 $cennik = [
   ['nazwa' => 'Przegląd podstawowy', 'cena' => 90],
   ['nazwa' => 'Duży serwis kompleksowy', 'cena' => 190],
