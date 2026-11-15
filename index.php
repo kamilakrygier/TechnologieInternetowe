@@ -1,10 +1,11 @@
 <?php
 // Zmienne PHP
-$firma = 'Szprycha';$rok = date('Y');
+$firma = 'Szprycha';
+$rok = date('Y');
 
 // Lab 3 - Cennik z bazy danych
 require 'baza.php';
-$cennik =$pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll();
+$cennik = $pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -53,4 +54,52 @@ $cennik =$pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll()
         <article class="card card--highlight">
           <span class="badge">Najczęściej wybierane</span>
           <h3>Duży serwis</h3>
-          <p>Kompleksowe czyszczenie napędu
+          <p>Kompleksowe czyszczenie napędu, centrowanie kół, regulacja przerzutek i hamulców.</p>
+          <p class="card_price">od 190 zł</p>
+        </article>
+        <article class="card">
+          <h3>Serwis amortyzatorów</h3>
+          <p>Wymiana oleju, uszczelek oraz precyzyjne ustawienie tłumienia.</p>
+          <p class="card_price">od 220 zł</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cennik">
+      <h2>Cennik</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Usługa</th>
+            <th class="num">Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($cennik as $usluga): ?>
+            <tr>
+              <td><?= htmlspecialchars($usluga['nazwa']) ?></td>
+              <td class="num"><?= $usluga['cena'] ?> zł</td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Adres: ul. Gdańska 10, 85-006 Bydgoszcz</p>
+    <p>Telefon: <a href="tel:+48500100200">+48 500 100 200</a></p>
+    <p>E-mail: <a href="mailto:kontakt@szprycha-bydgoszcz.pl">kontakt@szprycha-bydgoszcz.pl</a></p>
+    <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+      &copy; <?= $rok ?> <?= htmlspecialchars($firma) ?>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    gsap.from(".site-header", { duration: 0.8, y: -30, opacity: 0, ease: "power2.out" });
+    gsap.from(".card", { duration: 0.7, delay: 0.1, y: 30, opacity: 0, stagger: 0.15, ease: "power2.out", clearProps: "all" });
+  </script>
+</body>
+</html>
