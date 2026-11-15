@@ -1,10 +1,13 @@
 <?php
+// Zmienne PHP
 $firma = 'Szprycha';
 $rok = date('Y');
 
+// Lab 3 - Cennik z bazy danych
 require 'baza.php';
 $cennik = $pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll();
 ?>
+<!DOCTYPE html>
 <!DOCTYPE html>
 
 $cennik = [
